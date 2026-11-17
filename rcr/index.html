@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RCR video review</title>
+<!-- Reusable review page: copy next to a video, set VIDEO / TITLE / POSTER below, publish privately.
+     Notes are timestamped at the playhead, kept in this browser (localStorage), and exported as Markdown for Claude. -->
+<style>
+:root{--bg:#F4F4F7;--card:#FFFFFF;--ink:#002664;--muted:#5B6168;--accent:#D7153A;--line:#CDD3D6;--hl:#E6F6FE;--link:#146CFD}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161F;--card:#1C2230;--ink:#E6F0FF;--muted:#A3ABB8;--accent:#FF6B7F;--line:#2F3747;--hl:#1E3350;--link:#7FB0FF}}
+:root[data-theme="dark"]{--bg:#12161F;--card:#1C2230;--ink:#E6F0FF;--muted:#A3ABB8;--accent:#FF6B7F;--line:#2F3747;--hl:#1E3350;--link:#7FB0FF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 'Public Sans',Arial,system-ui,sans-serif}
+.chap{background:var(--card);border-radius:12px;padding:12px 14px;margin-top:14px}
+.chap h2{font-size:16px;margin:0 0 6px}
+.chap ul{list-style:none;margin:0;padding:0;columns:2;column-gap:24px}
+.chap li{border:0;padding:3px 0;display:block;break-inside:avoid}
+.chap button{background:none;color:var(--link);padding:0;border-radius:0;font-variant-numeric:tabular-nums;font-weight:700;margin-right:8px}
+@media (max-width:600px){.chap ul{columns:1}}
+header{max-width:1500px;margin:auto;padding:14px 16px 6px}
+h1{font-size:20px;margin:0}
+header p{margin:4px 0 0;color:var(--muted);font-size:14px}
+main{max-width:1500px;margin:auto;padding:8px 16px 28px;display:grid;grid-template-columns:minmax(0,3fr) minmax(300px,2fr);gap:18px}
+video{width:100%;border-radius:12px;background:#000;display:block}
+.bar{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
+button{font:inherit;border:0;border-radius:999px;padding:8px 14px;cursor:pointer;background:var(--ink);color:var(--bg)}
+button.alt{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+button.add{background:var(--accent);color:#fff;font-weight:600}
+.pane{background:var(--card);border-radius:12px;padding:12px;display:flex;flex-direction:column;max-height:calc(100vh - 110px)}
+.new{display:flex;gap:8px;align-items:flex-start}
+.new .t{font-variant-numeric:tabular-nums;font-weight:700;padding-top:8px;min-width:52px}
+textarea{flex:1;font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);resize:vertical;min-height:62px}
+ol{list-style:none;margin:12px 0 0;padding:0;overflow:auto;flex:1}
+li{display:flex;gap:8px;padding:8px 6px;border-top:1px solid var(--line);align-items:flex-start}
+li.now{background:var(--hl);border-radius:8px}
+li .ts{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);background:none;padding:0 4px;border-radius:4px;min-width:52px;text-align:left}
+li .txt{flex:1;white-space:pre-wrap;outline:none}
+li .del{background:none;color:var(--muted);padding:0 6px}
+.hint{color:var(--muted);font-size:13px;margin-top:8px}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-radius:4px;padding:0 4px}
+@media (max-width:900px){main{grid-template-columns:1fr}.pane{max-height:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Video review</h1>
+  <p>Draft for review, 2:35. Pause anywhere, type a comment in the notes box and press <b>Add note</b>: it's stamped with the video time. When you're done, press <b>Copy notes</b> and paste them into Teams or an email to Simon. Notes are kept in this browser until you clear them.</p>
+</header>
+<main>
+  <section>
+    <video id="v" controls preload="metadata"></video>
+    <div class="bar">
+      <button class="alt" id="back">−5 s</button>
+      <button class="alt" id="fwd">+5 s</button>
+      <button class="alt" id="slow">Speed 1×</button>
+      <span class="hint"><kbd>N</kbd> new note at the playhead · <kbd>Space</kbd> play/pause (outside the note box) · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> save</span>
+    </div>
+    <div class="chap"><h2>Sections</h2><ul id="chap"><li><button data-t="0">0:00</button>Title</li><li><button data-t="2.8">0:02</button>The Cleaning Services SSHR project</li><li><button data-t="15.7">0:15</button>Working together, not in silos</li><li><button data-t="26.1">0:26</button>The RCR Framework</li><li><button data-t="37.3">0:37</button>Agreeing roles for each outcome</li><li><button data-t="44.0">0:44</button>Responsible, Contributor, Reviewer</li><li><button data-t="56.9">0:56</button>Hardika, Service Designer</li><li><button data-t="68.3">1:08</button>Kota, Change Analyst</li><li><button data-t="78.5">1:18</button>Nick, Business Analyst</li><li><button data-t="86.9">1:26</button>Simon, Agile Lead</li><li><button data-t="96.4">1:36</button>What it gave the project</li><li><button data-t="113.0">1:53</button>One integrated team</li><li><button data-t="125.2">2:05</button>In the team's words</li><li><button data-t="150.7">2:30</button>End card</li></ul></div>
+  </section>
+  <section class="pane">
+    <div class="new">
+      <span class="t" id="nt">0:00</span>
+      <textarea id="note" placeholder="Your comment on this moment (wording, visuals, timing...)"></textarea>
+    </div>
+    <div class="bar">
+      <button class="add" id="add">Add note</button>
+      <button class="alt" id="copy">Copy notes</button>
+      <button class="alt" id="export">Download notes</button>
+      <button class="alt" id="clear">Clear all</button>
+    </div>
+    <ol id="list"></ol>
+  </section>
+</main>
+<script>
+// ---- set per video ----
+const VIDEO = (new URLSearchParams(location.search).get('v')) || 'video.mp4'
+document.getElementById('v').poster = 'poster.jpg'
+const TITLE = (new URLSearchParams(location.search).get('t')) || 'Better ways of working with the RCR Framework (draft v3)'
+// -----------------------
+const v = document.getElementById('v'), note = document.getElementById('note'), list = document.getElementById('list'), nt = document.getElementById('nt')
+v.src = VIDEO; document.getElementById('title').textContent = TITLE
+const KEY = 'review:' + VIDEO
+let notes = []
+try { notes = JSON.parse(localStorage.getItem(KEY) || '[]') } catch { notes = [] }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(notes)) } catch {} }
+const fmt = (s) => { s = Math.max(0, s); const m = Math.floor(s / 60), r = Math.floor(s % 60); return `${m}:${String(r).padStart(2, '0')}` }
+let pinned = null // time captured when the note box was focused
+function render() {
+  notes.sort((a, b) => a.t - b.t)
+  list.innerHTML = ''
+  for (const n of notes) {
+    const li = document.createElement('li'); li.dataset.t = n.t
+    const ts = document.createElement('button'); ts.className = 'ts'; ts.textContent = fmt(n.t); ts.onclick = () => { v.currentTime = n.t; v.play() }
+    const tx = document.createElement('div'); tx.className = 'txt'; tx.contentEditable = 'true'; tx.textContent = n.text
+    tx.oninput = () => { n.text = tx.textContent; save() }
+    const del = document.createElement('button'); del.className = 'del'; del.textContent = '✕'; del.title = 'Delete'
+    del.onclick = () => { notes = notes.filter((x) => x !== n); save(); render() }
+    li.append(ts, tx, del); list.append(li)
+  }
+}
+function add() {
+  const text = note.value.trim(); if (!text) return
+  notes.push({ t: pinned ?? v.currentTime, text }); save(); render()
+  note.value = ''; pinned = null; note.blur(); v.play()
+}
+note.addEventListener('focus', () => { pinned = v.currentTime; v.pause(); nt.textContent = fmt(pinned) })
+note.addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); add() } if (e.key === 'Escape') { note.blur(); pinned = null } })
+v.addEventListener('timeupdate', () => {
+  if (pinned === null) nt.textContent = fmt(v.currentTime)
+  for (const li of list.children) li.classList.toggle('now', Math.abs(Number(li.dataset.t) - v.currentTime) < 2)
+})
+document.addEventListener('keydown', (e) => {
+  if (e.target === note || e.target.isContentEditable) return
+  if (e.key === 'n' || e.key === 'N') { e.preventDefault(); note.focus() }
+  if (e.key === ' ') { e.preventDefault(); v.paused ? v.play() : v.pause() }
+  if (e.key === 'ArrowLeft') v.currentTime -= 5
+  if (e.key === 'ArrowRight') v.currentTime += 5
+})
+document.getElementById('add').onclick = add
+document.getElementById('back').onclick = () => { v.currentTime -= 5 }
+document.getElementById('fwd').onclick = () => { v.currentTime += 5 }
+const speeds = [1, 0.5, 1.5, 2]; let si = 0
+document.getElementById('slow').onclick = (e) => { si = (si + 1) % speeds.length; v.playbackRate = speeds[si]; e.target.textContent = `Speed ${speeds[si]}×` }
+const md = () => `Review notes: ${TITLE}\nExported: ${new Date().toLocaleString('en-AU')}\n\n` + notes.map((n) => `- [${fmt(n.t)}] (${n.t.toFixed(1)} s) ${n.text.replace(/\n/g, ' ')}`).join('\n') + '\n'
+document.getElementById('export').onclick = () => {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([md()], { type: 'text/markdown' }))
+  a.download = `review-${VIDEO.replace(/\.[^.]+$/, '').replace(/[^a-z0-9-]+/gi, '-')}.md`; a.click()
+}
+document.getElementById('copy').onclick = async (e) => { try { await navigator.clipboard.writeText(md()); e.target.textContent = 'Copied: paste into Teams or email'; setTimeout(() => (e.target.textContent = 'Copy notes'), 2500) } catch {} }
+document.getElementById('clear').onclick = () => { if (confirm('Delete all notes for this video?')) { notes = []; save(); render() } }
+render()
+for (const b of document.querySelectorAll('#chap button')) b.onclick = () => { v.currentTime = Number(b.dataset.t); v.play() }
+</script>
+</body>
+</html>
