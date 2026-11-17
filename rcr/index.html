@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RCR video review</title>
-<!-- Reusable review page: copy next to a video, set VIDEO / TITLE / POSTER below, publish privately.
+<title>Better ways of working with the RCR Framework (review)</title>
+<!-- Video review page (video-review-page skill): publish.py fills the __PLACEHOLDERS__.
      Notes are timestamped at the playhead, kept in this browser (localStorage), and exported as Markdown for Claude. -->
 <style>
 :root{--bg:#F4F4F7;--card:#FFFFFF;--ink:#002664;--muted:#5B6168;--accent:#D7153A;--line:#CDD3D6;--hl:#E6F6FE;--link:#146CFD}
@@ -45,7 +45,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-radius:
 <body>
 <header>
   <h1 id="title">Video review</h1>
-  <p>Draft for review, 2:35. Pause anywhere, type a comment in the notes box and press <b>Add note</b>: it's stamped with the video time. When you're done, press <b>Copy notes</b> and paste them into Teams or an email to Simon. Notes are kept in this browser until you clear them.</p>
+  <p>Draft v4 for review, 1:59. Pause anywhere, type a comment in the notes box and press <b>Add note</b>: it's stamped with the video time. When you're done, press <b>Copy notes</b> and paste them into Teams or an email to Simon. Notes are kept in this browser until you clear them.</p>
 </header>
 <main>
   <section>
@@ -56,7 +56,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-radius:
       <button class="alt" id="slow">Speed 1×</button>
       <span class="hint"><kbd>N</kbd> new note at the playhead · <kbd>Space</kbd> play/pause (outside the note box) · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> save</span>
     </div>
-    <div class="chap"><h2>Sections</h2><ul id="chap"><li><button data-t="0">0:00</button>Title</li><li><button data-t="2.8">0:02</button>The Cleaning Services SSHR project</li><li><button data-t="15.7">0:15</button>Working together, not in silos</li><li><button data-t="26.1">0:26</button>The RCR Framework</li><li><button data-t="37.3">0:37</button>Agreeing roles for each outcome</li><li><button data-t="44.0">0:44</button>Responsible, Contributor, Reviewer</li><li><button data-t="56.9">0:56</button>Hardika, Service Designer</li><li><button data-t="68.3">1:08</button>Kota, Change Analyst</li><li><button data-t="78.5">1:18</button>Nick, Business Analyst</li><li><button data-t="86.9">1:26</button>Simon, Agile Lead</li><li><button data-t="96.4">1:36</button>What it gave the project</li><li><button data-t="113.0">1:53</button>One integrated team</li><li><button data-t="125.2">2:05</button>In the team's words</li><li><button data-t="150.7">2:30</button>End card</li></ul></div>
+    <div class="chap"><h2>Sections</h2><ul id="chap"><li><button data-t="0">0:00</button>Title</li><li><button data-t="2">0:02</button>The Cleaning Services SSHR project</li><li><button data-t="12">0:12</button>Working together, not in silos</li><li><button data-t="20">0:20</button>The RCR Framework</li><li><button data-t="28">0:28</button>Agreeing roles for each outcome</li><li><button data-t="34">0:34</button>Responsible, Contributor, Reviewer</li><li><button data-t="44">0:44</button>Hardika, Service Designer</li><li><button data-t="53">0:53</button>Kota, Change Analyst</li><li><button data-t="61">1:01</button>Nick, Business Analyst</li><li><button data-t="68">1:08</button>Simon, Agile Lead</li><li><button data-t="75">1:15</button>What it gave the project</li><li><button data-t="88">1:28</button>One integrated team</li><li><button data-t="97">1:37</button>In the team&#x27;s words</li><li><button data-t="115">1:55</button>End card</li></ul></div>
   </section>
   <section class="pane">
     <div class="new">
@@ -76,7 +76,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-radius:
 // ---- set per video ----
 const VIDEO = (new URLSearchParams(location.search).get('v')) || 'video.mp4'
 document.getElementById('v').poster = 'poster.jpg'
-const TITLE = (new URLSearchParams(location.search).get('t')) || 'Better ways of working with the RCR Framework (draft v3)'
+const TITLE = (new URLSearchParams(location.search).get('t')) || 'Better ways of working with the RCR Framework (draft v4)'
 // -----------------------
 const v = document.getElementById('v'), note = document.getElementById('note'), list = document.getElementById('list'), nt = document.getElementById('nt')
 v.src = VIDEO; document.getElementById('title').textContent = TITLE
