@@ -1,6 +1,6 @@
 # Handover: sdc-videos
 
-Updated 2026-11-18 after project set up.
+Updated 2026-11-18 after draft v6 (no clipped narration).
 
 ## Start here (paste as the first prompt of the next session)
 > Continue sdc-videos (projects/sdc-videos). Read CLAUDE.md and HANDOVER.md first, then work down "Next" from 1.
@@ -11,9 +11,11 @@ Updated 2026-11-18 after project set up.
 - Publish with the skill: `python3 .claude/skills/video-review-page/publish.py VIDEO --slug rcr --version "draft vN" --dir projects/sdc-videos --owner Simon --section "m:ss Name" ...` (writes videos.json + root index, pushes, waits for Pages).
 
 ## Next (priority order)
-1. Act on the manager's review notes for `rcr/` (paste → note-frames.py → fix in Reel → re-render → replace video.mp4, bump "draft vN").
+1. **Manager's notes on draft v6** of `rcr/`: paste them → `python3 .claude/skills/video-review-page/note-frames.py notes.md VIDEO OUT/` → fix in Reel (`data/projects/sdc-rcr`) → voice/coverage checks → render → publish.py with the next version.
+2. **Share the `video-review-page` skill with the SDC team** (Simon's ask): zip it or add it to this repo under `skill/`; Simon hadn't picked which.
 
 ## Gotchas
+- Publish with `.claude/skills/video-review-page/publish.py` (pushes as Geljic with the noreply email); it rewrites the root index.html from videos.json.
 - DoE Zscaler blocks advice.gigglebooth.online ("Miscellaneous or Unknown"); github.io gets through.
 - Reviewer notes live in his browser's localStorage only, keyed by the video path: keep the file name `video.mp4`.
 
