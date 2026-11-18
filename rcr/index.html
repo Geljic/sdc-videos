@@ -45,7 +45,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-radius:
 <body>
 <header>
   <h1 id="title">Video review</h1>
-  <p>Draft v5 for review, 2:13. Pause anywhere, type a comment in the notes box and press <b>Add note</b>: it's stamped with the video time. When you're done, press <b>Copy notes</b> and paste them into Teams or an email to Simon. Notes are kept in this browser until you clear them.</p>
+  <p>Draft v6 for review, 2:29. Pause anywhere, type a comment in the notes box and press <b>Add note</b>: it's stamped with the video time. When you're done, press <b>Copy notes</b> and paste them into Teams or an email to Simon. Notes are kept in this browser until you clear them.</p>
 </header>
 <main>
   <section>
@@ -56,7 +56,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-radius:
       <button class="alt" id="slow">Speed 1×</button>
       <span class="hint"><kbd>N</kbd> new note at the playhead · <kbd>Space</kbd> play/pause (outside the note box) · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> save</span>
     </div>
-    <div class="chap"><h2>Sections</h2><ul id="chap"><li><button data-t="0">0:00</button>Title</li><li><button data-t="2">0:02</button>The Cleaning Services SSHR project</li><li><button data-t="14">0:14</button>Working together, not in silos</li><li><button data-t="23">0:23</button>The RCR Framework</li><li><button data-t="33">0:33</button>Agreeing roles for each outcome</li><li><button data-t="39">0:39</button>Responsible, Contributor, Reviewer</li><li><button data-t="50">0:50</button>Hardika, Service Designer</li><li><button data-t="60">1:00</button>Kota, Change Analyst</li><li><button data-t="68">1:08</button>Nick, Business Analyst</li><li><button data-t="76">1:16</button>Simon, Agile Lead</li><li><button data-t="84">1:24</button>What it gave the project</li><li><button data-t="98">1:38</button>One integrated team</li><li><button data-t="109">1:49</button>In the team&#x27;s words</li><li><button data-t="129">2:09</button>End card</li></ul></div>
+    <div class="chap"><h2>Sections</h2><ul id="chap"><li><button data-t="0">0:00</button>Title</li><li><button data-t="2">0:02</button>The Cleaning Services SSHR project</li><li><button data-t="15">0:15</button>Working together, not in silos</li><li><button data-t="25">0:25</button>The RCR Framework</li><li><button data-t="35">0:35</button>Agreeing roles for each outcome</li><li><button data-t="42">0:42</button>Responsible, Contributor, Reviewer</li><li><button data-t="55">0:55</button>Hardika, Service Designer</li><li><button data-t="66">1:06</button>Kota, Change Analyst</li><li><button data-t="76">1:16</button>Nick, Business Analyst</li><li><button data-t="84">1:24</button>Simon, Agile Lead</li><li><button data-t="93">1:33</button>What it gave the project</li><li><button data-t="109">1:49</button>One integrated team</li><li><button data-t="121">2:01</button>In the team&#x27;s words</li><li><button data-t="145">2:25</button>End card</li></ul></div>
   </section>
   <section class="pane">
     <div class="new">
@@ -76,7 +76,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-radius:
 // ---- set per video ----
 const VIDEO = (new URLSearchParams(location.search).get('v')) || 'video.mp4'
 document.getElementById('v').poster = 'poster.jpg'
-const TITLE = (new URLSearchParams(location.search).get('t')) || 'Better ways of working with the RCR Framework (draft v5)'
+const TITLE = (new URLSearchParams(location.search).get('t')) || 'Better ways of working with the RCR Framework (draft v6)'
 // -----------------------
 const v = document.getElementById('v'), note = document.getElementById('note'), list = document.getElementById('list'), nt = document.getElementById('nt')
 v.src = VIDEO; document.getElementById('title').textContent = TITLE
