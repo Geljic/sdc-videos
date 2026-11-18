@@ -7,7 +7,7 @@ Updated 2026-11-18 after project set up.
 
 ## State
 - Public repo Geljic/sdc-videos, GitHub Pages from main: https://geljic.github.io/sdc-videos/
-- `rcr/`: "Better ways of working with the RCR Framework" draft v5 (Reel project `sdc-rcr`, voice DoE-Voice-Main `1c5fd70b` at speed 1, 2:13), review page for the SDC manager. v4 fixed his 3 notes (black edge on push/slide transitions, BA too early, broken handshake icon); v5 fixes cut-off narration (voice at 1.15 dropped line endings; checked end to end with Reel `scripts/vo-final-check.ts`).
+- `rcr/`: "Better ways of working with the RCR Framework" draft v6 (Reel project `sdc-rcr`, voice DoE-Voice-Main `1c5fd70b` at speed 1, raw + Reel-finished clips with a 0.45 s hold, 2:29), review page for the SDC manager. v4 fixed his 3 notes (black edge on push/slide transitions, BA too early, broken handshake icon); v5 fixes cut-off narration (voice at 1.15 dropped line endings; checked end to end with Reel `scripts/vo-final-check.ts`).
 - Publish with the skill: `python3 .claude/skills/video-review-page/publish.py VIDEO --slug rcr --version "draft vN" --dir projects/sdc-videos --owner Simon --section "m:ss Name" ...` (writes videos.json + root index, pushes, waits for Pages).
 
 ## Next (priority order)
