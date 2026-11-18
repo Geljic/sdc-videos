@@ -1,16 +1,16 @@
 [
  {
-  "slug": "rcr-v1",
-  "title": "Better ways of working with the RCR Framework (first version)",
-  "version": "first version",
-  "length": "2:34",
-  "updated": "2026-11-19"
- },
- {
   "slug": "rcr",
   "title": "Better ways of working with the RCR Framework",
   "version": "draft v6",
   "length": "2:29",
   "updated": "2026-11-18"
+ },
+ {
+  "slug": "rcr-v1",
+  "title": "Better ways of working with the RCR Framework (first version)",
+  "version": "first version",
+  "length": "2:34",
+  "updated": "2026-11-19"
  }
 ]
