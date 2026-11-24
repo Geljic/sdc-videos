@@ -26,3 +26,8 @@ Updated 2026-11-19: first version added as its own page.
 ## History
 - 2026-11-19: first version published as `rcr-v1/`.
 - 2026-11-18: project created; RCR video v3 published; v4 after the manager's notes, published with the video-review-page skill.
+
+## 2026-11-24: RCR draft v7 (built on ZimaOS, PC offline)
+- Clinton's notes: graphic SFX removed (Demucs vocals stem only, no_vocals dropped), 0:36 and 0:57 lines re-voiced with VoiceStudio DoE-Voice-Main, shots frozen to fit; 2:32.
+- New lofi bed from music-craft `sdc-rcr-bed-v7` (original bed is on the PC).
+- Sections timestamps shifted in rcr/index.html. The Reel project `data/projects/sdc-rcr` on the PC is now behind v7; v7 was patched from the v6 render, not re-rendered in Reel.
